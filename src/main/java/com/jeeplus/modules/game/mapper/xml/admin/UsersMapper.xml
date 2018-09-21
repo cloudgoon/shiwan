@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeeplus.modules.game.mapper.admin.UsersMapper">
+    
+	<sql id="usersColumns">
+		a.id AS "id",
+		a.phone_num AS "phoneNum",
+		a.agency_id AS "agency.id",
+		a.password AS "password",
+		a.balance AS "balance",
+		a.realname AS "realName",
+		a.sex AS "sex",
+		a.idcard AS "idcard",
+		a.alipay_name AS "alipayName",
+		a.alipay_account AS "alipayAccount",
+		a.area AS "area",
+		a.phone_os AS "phoneOS",
+		a.status AS "status",
+		a.expiredate AS "expireDate",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag",
+				
+				
+		agency.name AS "agency.name"
+	</sql>
+	
+	<sql id="usersJoins">
+		
+		LEFT JOIN game_agency agency ON agency.id = a.agency_id
+	</sql>
+	
+    
+	<select id="get" resultType="Users" >
+		SELECT 
+			<include refid="usersColumns"/>
+		FROM game_users a
+		<include refid="usersJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Users" >
+		SELECT 
+			<include refid="usersColumns"/>
+		FROM game_users a
+		<include refid="usersJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			${dataScope}
+			<if test="phoneNum != null and phoneNum != ''">
+				AND a.phone_num LIKE 
+					<if test="dbName == 'oracle'">'%'||#{phoneNum}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{phoneNum}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{phoneNum},'%')</if>
+			</if>
+			<if test="agency != null and agency.id != null and agency.id != ''">
+				AND a.agency_id = #{agency.id}
+			</if>
+			<if test="realName != null and realName != ''">
+				AND a.realname LIKE 
+					<if test="dbName == 'oracle'">'%'||#{realName}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{realName}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{realName},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Users" >
+		SELECT 
+			<include refid="usersColumns"/>
+		FROM game_users a
+		<include refid="usersJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			${dataScope}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO game_users(
+			id,
+			phone_num,
+			agency_id,
+			password,
+			balance,
+			realname,
+			sex,
+			idcard,
+			alipay_name,
+			alipay_account,
+			area,
+			phone_os,
+			status,
+			expiredate,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{phoneNum},
+			#{agency.id},
+			#{password},
+			#{balance},
+			#{realName},
+			#{sex},
+			#{idcard},
+			#{alipayName},
+			#{alipayAccount},
+			#{area},
+			#{phoneOS},
+			#{status},
+			#{expireDate},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE game_users SET 	
+			phone_num = #{phoneNum},
+			agency_id = #{agency.id},
+			password = #{password},
+			balance = #{balance},
+			realname = #{realName},
+			sex = #{sex},
+			idcard = #{idcard},
+			alipay_name = #{alipayName},
+			alipay_account = #{alipayAccount},
+			area = #{area},
+			phone_os = #{phoneOS},
+			status = #{status},
+			expiredate = #{expireDate},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!--物理删除-->
+	<update id="delete">
+		DELETE FROM game_users
+		WHERE id = #{id}
+	</update>
+	
+	<!--逻辑删除-->
+	<update id="deleteByLogic">
+		UPDATE game_users SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 根据实体名称和字段名称和字段值获取唯一记录 -->
+	<select id="findUniqueByProperty" resultType="Users" statementType="STATEMENT">
+		select * FROM game_users  where ${propertyName} = '${value}'
+	</select>
+	
+	<select id="getRichList" resultType="Users">
+		select *
+		FROM game_users
+		ORDER BY balance DESC
+		limit 0,20
+	</select>
+	<select id="getById" resultType="Users">
+		SELECT 
+		a.id AS "id",
+		a.phone_num AS "phoneNum",
+		a.agency_id AS "agency.id",
+		a.balance AS "balance",
+		a.status AS "status",
+		agency.name AS "agency.name"
+		FROM game_users a
+		LEFT JOIN game_agency agency ON agency.id = a.agency_id
+		where
+		a.id = #{id}
+	</select>
+</mapper>
