@@ -76,22 +76,10 @@ $(document).ready(function() {
 		        checkbox: true
 		       
 		    }
+			
 			,{
-		        field: 'users.alipayAccount',
-		        title: '支付宝账号',
-		        sortable: true
-		        ,formatter:function(value, row , index){
- 			    if(value == null){
-		            	return "<a href='javascript:edit(\""+row.id+"\")'>-</a>";
-		            }else{
-		                return "<a href='javascript:edit(\""+row.id+"\")'>"+value+"</a>";
-		            }
-		        }
-		       
-		    }
-			,{
-				field: 'users.realName',
-				title: '姓名',
+				field: 'users.phoneNum',
+				title: '手机号',
 				sortable: true
 				
 			}

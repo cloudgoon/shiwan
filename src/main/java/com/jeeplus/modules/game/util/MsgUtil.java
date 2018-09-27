@@ -35,15 +35,15 @@ public class MsgUtil {
     static final String domain = "dysmsapi.aliyuncs.com";
 
     // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-    static final String accessKeyId = "LTAIvMFKvNyFvkeA";
-    static final String accessKeySecret = "2PeoGcwB3hVh0AA8Jwn2VypM08JDF6";
+    static final String accessKeyId = "LTAI1EWR1xE1HpAJ";
+    static final String accessKeySecret = "1QTD2kn6eShuu4XFhsKC18ba6aYTkt";
 
     public static SendSmsResponse sendCode(String phoneNum,String verifyCode) throws ClientException {
 
         //可自助调整超时时间
        /* System.setProperty("sun.net.client.defaultConnectTimeout", "1000");
         System.setProperty("sun.net.client.defaultReadTimeout", "1000");*/
-
+    	
         //初始化acsClient,暂不支持region化
         IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
@@ -54,9 +54,9 @@ public class MsgUtil {
         //必填:待发送手机号
         request.setPhoneNumbers(phoneNum);
         //必填:短信签名-可在短信控制台中找到
-        request.setSignName("享玩游");
+        request.setSignName("试玩有赚");
         //必填:短信模板-可在短信控制台中找到
-        request.setTemplateCode("SMS_141905121");
+        request.setTemplateCode("SMS_145250084");
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
         //request.setTemplateParam("{\"name\":\"Tom\", \"code\":\"123\"}");
         request.setTemplateParam("{\"code\":\""+verifyCode+"\"}");

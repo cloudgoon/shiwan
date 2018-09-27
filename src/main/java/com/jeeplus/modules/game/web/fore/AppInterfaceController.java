@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.hssf.record.PasswordRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,7 +107,7 @@ public class AppInterfaceController {
 		if(uniUser != null) {
 			System.out.println(uniUser.toString());
 			//若用户存在，则把请求中的密码和加密后的用户密码比较
-			if(SystemService.validatePassword(password, uniUser.getPassword())) {
+			if(password.equals(uniUser.getPassword())) {
 				// '1' 代表密码正确
 				session.setAttribute("userId", uniUser.getId());
 				System.out.println("userId:"+uniUser.getId());
@@ -236,7 +237,6 @@ public class AppInterfaceController {
 		Users uniUser = usersService.findUniqueByProperty("phone_num", users.getPhoneNum());
 		if(uniUser == null) {
 			//加密密码，并且存入数据库
-			users.setPassword(SystemService.entryptPassword(users.getPassword()));
 			users.setStatus(0);
 			if(!verifyCode.equals(code)) {
 				//验证码不正确

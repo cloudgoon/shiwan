@@ -24,11 +24,6 @@
 		<div class="accordion-inner">
 			<form:form id="searchForm" modelAttribute="withdraw" class="form form-horizontal well clearfix">
 			 <div class="col-xs-12 col-sm-6 col-md-4">
-				<label class="label-item single-overflow pull-left" title="支付宝账号：">支付宝账号：</label>
-				<sys:gridselect url="${ctx}/game/admin/users/data" id="users" name="users.id" value="${withdraw.users.id}" labelName="users.alipayAccount" labelValue="${withdraw.users.alipayAccount}"
-					title="选择支付宝账号" cssClass="form-control required" fieldLabels="支付宝账号|姓名|手机号" fieldKeys="alipayAccount|realName|phoneNum" searchLabels="支付宝账号|姓名|手机号" searchKeys="alipayAccount|realName|phoneNum" ></sys:gridselect>
-			</div>
-			 <div class="col-xs-12 col-sm-6 col-md-4">
 				<div class="form-group">
 					<label class="label-item single-overflow pull-left" title="提现状态：">&nbsp;提现状态：</label>
 					<div class="col-xs-12">
@@ -68,8 +63,6 @@
 						<form id="importForm" action="${ctx}/game/admin/withdraw/import" method="post" enctype="multipart/form-data"
 							 style="padding-left:20px;text-align:center;" ><br/>
 							<input id="uploadFile" name="file" type="file" style="width:330px"/>导入文件不能超过5M，仅允许导入“xls”或“xlsx”格式文件！<br/>　　
-							
-							
 						</form>
 				</div>
 			</shiro:hasPermission>

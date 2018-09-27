@@ -68,7 +68,7 @@
 						<form:input path="title" htmlEscape="false"    class="form-control "/>
 					</td>
 					<td class="width-15 active"><label class="pull-right">关于我们：</label></td>
-					<td class="width-85">
+					<td class="width-55">
                         <%-- <input type="hidden" name="aboutus"/>
 						<div id="aboutus">
                           ${fns:unescapeHtml(aboutus.aboutus)}

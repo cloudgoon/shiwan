@@ -103,54 +103,7 @@ $(document).ready(function() {
 		        sortable: true
 		       
 		    }
-			,{
-		        field: 'realName',
-		        title: '真实姓名',
-		        sortable: true
-		       
-		    }
-			,{
-		        field: 'sex',
-		        title: '性别',
-		        sortable: true,
-		        formatter:function(value, row , index){
-		        	return jp.getDictLabel(${fns:toJson(fns:getDictList('sex'))}, value, "-");
-		        }
-		       
-		    }
-			,{
-		        field: 'idcard',
-		        title: '身份证',
-		        sortable: true
-		       
-		    }
-			,{
-		        field: 'alipayName',
-		        title: '支付宝昵称',
-		        sortable: true
-		       
-		    }
-			,{
-		        field: 'alipayAccount',
-		        title: '支付宝账号',
-		        sortable: true
-		       
-		    }
-			,{
-		        field: 'area',
-		        title: '地区',
-		        sortable: true
-		       
-		    }
-			,{
-		        field: 'phoneOS',
-		        title: '手机操作系统',
-		        sortable: true,
-		        formatter:function(value, row , index){
-		        	return jp.getDictLabel(${fns:toJson(fns:getDictList('phone_os'))}, value, "-");
-		        }
-		       
-		    }
+			
 			,{
 		        field: 'status',
 		        title: '状态',

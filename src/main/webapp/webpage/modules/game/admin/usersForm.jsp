@@ -78,43 +78,9 @@
 						<form:input path="balance" htmlEscape="false"    class="form-control "/>
 					</td>
 				</tr>
+				
 				<tr>
-					<td class="width-15 active"><label class="pull-right">真实姓名：</label></td>
-					<td class="width-35">
-						<form:input path="realName" htmlEscape="false"    class="form-control "/>
-					</td>
-					<td class="width-15 active"><label class="pull-right">性别：</label></td>
-					<td class="width-35">
-						<form:radiobuttons path="sex" items="${fns:getDictList('sex')}" itemLabel="label" itemValue="value" htmlEscape="false" class="i-checks "/>
-					</td>
-				</tr>
-				<tr>
-					<td class="width-15 active"><label class="pull-right">身份证：</label></td>
-					<td class="width-35">
-						<form:input path="idcard" htmlEscape="false"    class="form-control "/>
-					</td>
-					<td class="width-15 active"><label class="pull-right">支付宝昵称：</label></td>
-					<td class="width-35">
-						<form:input path="alipayName" htmlEscape="false"    class="form-control "/>
-					</td>
-				</tr>
-				<tr>
-					<td class="width-15 active"><label class="pull-right">支付宝账号：</label></td>
-					<td class="width-35">
-						<form:input path="alipayAccount" htmlEscape="false"    class="form-control "/>
-					</td>
-					<td class="width-15 active"><label class="pull-right">地区：</label></td>
-					<td class="width-35">
-					<div class=" input-group" style=" width: 100%;">
-						  <form:input path="area" htmlEscape="false"  class="" data-toggle="city-picker" style="height: 34px;"/>
-					</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="width-15 active"><label class="pull-right">手机操作系统：</label></td>
-					<td class="width-35">
-						<form:radiobuttons path="phoneOS" items="${fns:getDictList('phone_os')}" itemLabel="label" itemValue="value" htmlEscape="false" class="i-checks "/>
-					</td>
+					
 					<td class="width-15 active"><label class="pull-right">状态：</label></td>
 					<td class="width-35">
 						<form:radiobuttons path="status" items="${fns:getDictList('user_status')}" itemLabel="label" itemValue="value" htmlEscape="false" class="i-checks "/>

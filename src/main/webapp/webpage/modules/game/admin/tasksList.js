@@ -133,13 +133,13 @@ $(document).ready(function() {
 		    }
 			,{
 		        field: 'numTotal',
-		        title: '可领任务总数量',
+		        title: '任务总数',
 		        sortable: true
 		       
 		    }
 			,{
 		        field: 'numRemain',
-		        title: '剩余任务数量',
+		        title: '已领取',
 		        sortable: true
 		       
 		    }
